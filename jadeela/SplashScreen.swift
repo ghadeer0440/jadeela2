@@ -3,7 +3,7 @@
 //  jadeela
 //
 //  Created by Ghadeer on 23/11/2023.
-//
+// test
 import SwiftUI
 
 struct SplashScreen: View {
