@@ -9,6 +9,7 @@ import AVFoundation
 import Photos
 
 struct ContentView: View {
+
     @State private var isShowingCamera = false
     @State private var isActive: Bool = false
     @State private var hairTypeActive = false
@@ -39,7 +40,7 @@ struct ContentView: View {
                     Text("* Hair must be Dry")
                     Text("* The photo must be stable")
                     
-                    VStack(spacing: 20) {
+                    VStack(spacing: 30) {
                         Button(action: {
                             openCamera()
                         }) {
@@ -58,8 +59,7 @@ struct ContentView: View {
                         .padding(.top, 50.0)
                         .buttonStyle(PlainButtonStyle())
                         
-                        
-                        Text("__________ OR __________")
+                       // Text("__________ OR __________")
                         
                         Button(action: {
                             isActive = true
@@ -79,20 +79,21 @@ struct ContentView: View {
                             .background(Color(UIColor(hex: "8E6FCF")))
                             .cornerRadius(10)
                         }
-                        .padding(.top, 10.0)
+                       
                         .buttonStyle(PlainButtonStyle())
                         
             NavigationLink(
-                destination: HairType()
-       .navigationBarBackButtonHidden(true) // Hide back button in the destination view
-     .navigationBarHidden(true), // Hide navigation bar in the destination view
+                destination: Routine(),
+                
+     //  .navigationBarBackButtonHidden(true) // Hide back button in the destination view
+   //  .navigationBarHidden(true), // Hide navigation bar in the destination view
                 isActive: $isActive,
             label: { EmptyView() }
                         )
                     }
                     .padding(.top, 20)
                 }
-                .padding()
+               // .padding(.horizontal, 50)
             }
             .sheet(isPresented: $isShowingCamera) {
                 #if targetEnvironment(simulator)
@@ -101,7 +102,10 @@ struct ContentView: View {
                 CameraViewController(isPresented: $isShowingCamera)
                 #endif
             }
-        }
+        } 
+   .padding(.horizontal, 60)
+        .tint(Color(UIColor(hex: "8E6FCF")))
+
         
     } //body
     
