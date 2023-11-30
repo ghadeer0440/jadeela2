@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		432EE2042B15C5E60063FB9C /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432EE2032B15C5E60063FB9C /* Routine.swift */; };
+		4BAF62B92B18650A00170310 /* tuggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF62B82B18650A00170310 /* tuggle.swift */; };
+		4BAF62BB2B18659500170310 /* localNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF62BA2B18659500170310 /* localNotification.swift */; };
+		4BAF62BD2B1865B300170310 /* oil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF62BC2B1865B300170310 /* oil.swift */; };
+		4BAF62BF2B1865E300170310 /* cut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF62BE2B1865E300170310 /* cut.swift */; };
+		4BAF62C12B18660C00170310 /* wavy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF62C02B18660C00170310 /* wavy.swift */; };
+		4BAF62C32B18662500170310 /* curly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF62C22B18662500170310 /* curly.swift */; };
+		4BAF62C52B18664400170310 /* straight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF62C42B18664400170310 /* straight.swift */; };
 		6BE3CED12B0F38A5009234A2 /* jadeelaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE3CED02B0F38A5009234A2 /* jadeelaApp.swift */; };
 		6BE3CED32B0F38A5009234A2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE3CED22B0F38A5009234A2 /* ContentView.swift */; };
 		6BE3CED52B0F38A6009234A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BE3CED42B0F38A6009234A2 /* Assets.xcassets */; };
@@ -38,6 +45,13 @@
 
 /* Begin PBXFileReference section */
 		432EE2032B15C5E60063FB9C /* Routine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
+		4BAF62B82B18650A00170310 /* tuggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tuggle.swift; sourceTree = "<group>"; };
+		4BAF62BA2B18659500170310 /* localNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = localNotification.swift; sourceTree = "<group>"; };
+		4BAF62BC2B1865B300170310 /* oil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oil.swift; sourceTree = "<group>"; };
+		4BAF62BE2B1865E300170310 /* cut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cut.swift; sourceTree = "<group>"; };
+		4BAF62C02B18660C00170310 /* wavy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wavy.swift; sourceTree = "<group>"; };
+		4BAF62C22B18662500170310 /* curly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = curly.swift; sourceTree = "<group>"; };
+		4BAF62C42B18664400170310 /* straight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = straight.swift; sourceTree = "<group>"; };
 		6BE3CECD2B0F38A5009234A2 /* jadeela.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jadeela.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BE3CED02B0F38A5009234A2 /* jadeelaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jadeelaApp.swift; sourceTree = "<group>"; };
 		6BE3CED22B0F38A5009234A2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -103,8 +117,15 @@
 				6BE3CED02B0F38A5009234A2 /* jadeelaApp.swift */,
 				6BE3CEFC2B0F40D2009234A2 /* SplashScreen.swift */,
 				6BE3CED22B0F38A5009234A2 /* ContentView.swift */,
+				4BAF62B82B18650A00170310 /* tuggle.swift */,
 				432EE2032B15C5E60063FB9C /* Routine.swift */,
 				6BE3CEFE2B0F98D8009234A2 /* Camera.swift */,
+				4BAF62BA2B18659500170310 /* localNotification.swift */,
+				4BAF62BC2B1865B300170310 /* oil.swift */,
+				4BAF62BE2B1865E300170310 /* cut.swift */,
+				4BAF62C02B18660C00170310 /* wavy.swift */,
+				4BAF62C22B18662500170310 /* curly.swift */,
+				4BAF62C42B18664400170310 /* straight.swift */,
 				6BE3CED42B0F38A6009234A2 /* Assets.xcassets */,
 				6BE3CED62B0F38A6009234A2 /* Preview Content */,
 			);
@@ -266,10 +287,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BAF62BF2B1865E300170310 /* cut.swift in Sources */,
+				4BAF62BD2B1865B300170310 /* oil.swift in Sources */,
+				4BAF62C32B18662500170310 /* curly.swift in Sources */,
+				4BAF62C52B18664400170310 /* straight.swift in Sources */,
 				6BE3CEFF2B0F98D8009234A2 /* Camera.swift in Sources */,
 				6BE3CEFD2B0F40D2009234A2 /* SplashScreen.swift in Sources */,
+				4BAF62BB2B18659500170310 /* localNotification.swift in Sources */,
 				432EE2042B15C5E60063FB9C /* Routine.swift in Sources */,
+				4BAF62B92B18650A00170310 /* tuggle.swift in Sources */,
 				6BE3CED32B0F38A5009234A2 /* ContentView.swift in Sources */,
+				4BAF62C12B18660C00170310 /* wavy.swift in Sources */,
 				6BE3CED12B0F38A5009234A2 /* jadeelaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
