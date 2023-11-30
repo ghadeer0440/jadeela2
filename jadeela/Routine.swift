@@ -62,7 +62,7 @@ struct Routine: View {
                             VStack {
                                 
                                 
-                                Image("mask2")
+                                Image("oil2")
                                     .resizable(resizingMode: .stretch)
                                     .foregroundColor(Color.white)
                                     .frame(width: 38.0, height: 36.0)
@@ -86,7 +86,7 @@ struct Routine: View {
                             VStack {
                                 
                                 
-                                Image("mask2")
+                                Image("cut")
                                     .resizable(resizingMode: .stretch)
                                     .foregroundColor(Color.white)
                                     .frame(width: 38.0, height: 36.0)

@@ -63,6 +63,8 @@ struct ContentView: View {
                         
                         Button(action: {
                             isActive = true
+                            NotificationManager.instance
+                                .schedualeNotification()
                         }) {
                             HStack {
                                 Text("Go to routine")
