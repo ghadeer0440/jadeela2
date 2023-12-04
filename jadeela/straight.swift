@@ -46,7 +46,6 @@ struct straight: View {
                     
                     Image("straight")
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
                         .frame(width: 400, height: 400)
                         .padding(.bottom, 90.0)
                 }

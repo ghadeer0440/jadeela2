@@ -242,8 +242,7 @@ struct Task: Identifiable, Codable {
                         .foregroundColor(Color(red: 0.538, green: 0.46, blue: 0.711))
                     
                 })
-                .tint(.purple)
-
+                .tint(Color(UIColor(hex: "8E6FCF")))
             }
         }
     }
@@ -315,7 +314,7 @@ struct AddTaskView: View {
             })
             .background(exampleColor)
             .scrollContentBackground(.hidden)
-            .tint(.purple)
+            .tint(Color(UIColor(hex: "8E6FCF")))
             .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
         }
     }

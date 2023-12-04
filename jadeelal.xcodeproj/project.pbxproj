@@ -242,7 +242,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6BE3CEC82B0F38A5009234A2 /* Build configuration list for PBXProject "jadeela" */;
+			buildConfigurationList = 6BE3CEC82B0F38A5009234A2 /* Build configuration list for PBXProject "jadeelal" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -597,7 +597,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6BE3CEC82B0F38A5009234A2 /* Build configuration list for PBXProject "jadeela" */ = {
+		6BE3CEC82B0F38A5009234A2 /* Build configuration list for PBXProject "jadeelal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6BE3CEEF2B0F38A6009234A2 /* Debug */,
