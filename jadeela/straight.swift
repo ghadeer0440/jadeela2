@@ -8,55 +8,57 @@
 import SwiftUI
 
 struct straight: View {
+    @State private var navigateToRoutine = false
+    
     var body: some View {
+
+            ZStack {
+                Color(UIColor(hex: "FFFBF8"))
+                    .ignoresSafeArea()
+                VStack {
+                    Text("Your hair type is:")
+                        .font(.system(size: 32))
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.black)
+                        .padding(.top, 200)
+                    
+                    Text("Straight")
+                        .font(.system(size: 24))
+                        .padding(.top, -5)
+                    
+                    NavigationLink(
+                        destination: Routine(),
+                        isActive: $navigateToRoutine,
+                        label: {
+                            Text("Next")
+                                .foregroundColor(.white)
+                                .frame(width: 200, height: 20)
+                                .padding()
+                                .background(Color(UIColor(hex: "8E6FCF")))
+                                .cornerRadius(10)
+                                .onTapGesture {
+                                    navigateToRoutine = true
+                                }
+                        })
+                        .padding(.top, 60)
+                        .padding(.bottom, 60.0)
+                    
+                    Image("straight")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 400, height: 400)
+                        .padding(.bottom, 90.0)
+                }
+                .padding(.top, 90.0)
+            }
         
-                    ZStack{
-                        Color(UIColor(hex: "FFFBF8"))
-                            .ignoresSafeArea()
-                    VStack {
-                        Text("Your hair type is:")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.black)
-                            .accessibilityLabel(/*@START_MENU_TOKEN@*/"Label"/*@END_MENU_TOKEN@*/)
-                        
-                        Text("straight")
-                            .padding()
-                        
-                        
-                        
-                        
-                        Button("next") {
-                            /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                        }
-                        
-                        .frame(width: 200, height: 40)
-                        .background(Color("button color"))
-                        .padding(.bottom, 20.0)
-                        .accessibilityAddTraits([.isButton])
-                        .foregroundColor(.white)
-                        
-                        .padding(/*@START_MENU_TOKEN@*/EdgeInsets()/*@END_MENU_TOKEN@*/)
-                        
-                        Image("straight")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 400,height: 400)
-                        
-                            .padding(.top, 165.0)
-                        
-                        
-                        
-                        
-                      
-                    }
-                    .padding(.top, 130.0)
-                    
-                }
-                    
-                }
-};struct straight_Previews: PreviewProvider {
+    }
+}
+
+struct straight_Previews: PreviewProvider {
     static var previews: some View {
         straight()
     }
 }
+

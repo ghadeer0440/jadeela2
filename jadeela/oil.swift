@@ -18,7 +18,7 @@ struct oil: View {
 
 
     var body: some View {
-        NavigationView {
+//        NavigationView {
             VStack {
               
                 List {
@@ -56,7 +56,7 @@ struct oil: View {
             .scrollContentBackground(.hidden)
             .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
            
-        }
+//        }
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

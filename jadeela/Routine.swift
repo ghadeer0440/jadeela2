@@ -26,7 +26,7 @@ struct Routine: View {
     
     var body: some View {
         
-        NavigationView {
+//        NavigationView {
             
             ZStack {
                 Color(UIColor(hex: "FFFBF8"))
@@ -125,8 +125,8 @@ struct Routine: View {
                     //                     Spacer(minLength: -100)
                     
                     VStack(alignment: .leading){
-                        Text("calendar")
-                            .offset(x:100, y:0)
+                        Text("Calendar")
+                            .offset(x:11, y:17)
                             .font(.title2)
                             .fontWeight(.bold)
                             .multilineTextAlignment(.leading)
@@ -189,7 +189,7 @@ struct Routine: View {
             }
             
             
-        }
+//        }
         .navigationBarBackButtonHidden(true)                .navigationBarTitle("Routine", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

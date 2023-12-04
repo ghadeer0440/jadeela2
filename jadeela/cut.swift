@@ -16,7 +16,7 @@ struct cut: View {
     let exampleColor: Color = (Color(red: 1.0, green: 0.984, blue: 0.975))
 
     var body: some View {
-        NavigationView {
+//        NavigationView {
             VStack {
                 
                  List {
@@ -53,7 +53,7 @@ struct cut: View {
             .background(exampleColor)
             .scrollContentBackground(.hidden)
             .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-        }
+//        }
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

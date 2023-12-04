@@ -25,6 +25,7 @@
 		6BE3CEFD2B0F40D2009234A2 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE3CEFC2B0F40D2009234A2 /* SplashScreen.swift */; };
 		6BE3CEFF2B0F98D8009234A2 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE3CEFE2B0F98D8009234A2 /* Camera.swift */; };
 		A2372FCF2B1C7735001F5758 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2372FCE2B1C7735001F5758 /* Task.swift */; };
+		A2372FD52B1DD42D001F5758 /* MyImageClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A2372FD42B1DD42D001F5758 /* MyImageClassifier.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		6BE3CEFC2B0F40D2009234A2 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		6BE3CEFE2B0F98D8009234A2 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		A2372FCE2B1C7735001F5758 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		A2372FD42B1DD42D001F5758 /* MyImageClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MyImageClassifier.mlmodel; path = "../../../Downloads/jadeela2 5/jadeela/MyImageClassifier.mlmodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				4BAF62C02B18660C00170310 /* wavy.swift */,
 				4BAF62C22B18662500170310 /* curly.swift */,
 				4BAF62C42B18664400170310 /* straight.swift */,
+				A2372FD42B1DD42D001F5758 /* MyImageClassifier.mlmodel */,
 				6BE3CED42B0F38A6009234A2 /* Assets.xcassets */,
 				6BE3CED62B0F38A6009234A2 /* Preview Content */,
 			);
@@ -299,6 +302,7 @@
 				4BAF62BB2B18659500170310 /* localNotification.swift in Sources */,
 				432EE2042B15C5E60063FB9C /* Routine.swift in Sources */,
 				4BAF62B92B18650A00170310 /* tuggle.swift in Sources */,
+				A2372FD52B1DD42D001F5758 /* MyImageClassifier.mlmodel in Sources */,
 				6BE3CED32B0F38A5009234A2 /* ContentView.swift in Sources */,
 				4BAF62C12B18660C00170310 /* wavy.swift in Sources */,
 				A2372FCF2B1C7735001F5758 /* Task.swift in Sources */,
