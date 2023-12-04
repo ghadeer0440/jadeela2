@@ -2,7 +2,7 @@
 //  wavy.swift
 //  jadeela
 //
-//  Created by Diyam Alrabah on 16/05/1445 AH.
+//  Created by aisha rashid alshammari  on 18/05/1445 AH.
 //
 
 import SwiftUI

@@ -2,98 +2,157 @@
 //  oil.swift
 //  jadeela
 //
-//  Created by Diyam Alrabah on 16/05/1445 AH.
+//  Created by aisha rashid alshammari  on 18/05/1445 AH.
 //
 
 import SwiftUI
+import SwiftData
 
 struct oil: View {
     @Environment(\.presentationMode) var presentationMode
-      
-            @State private var tasks: [Task] = []
-            @State private var showingAddTask1 = false
-            let exampleColor : Color = (Color(red: 1.0, green: 0.984, blue: 0.975))
-            var body: some View {
-                NavigationView {
-                    VStack {
-                        List {
-                            ForEach(tasks.indices, id: \.self) { index in
-                                Task1Row(task: $tasks[index])
-                                
-                            }
-                            .onMove(perform: move)
-                            .onDelete(perform: delete)
-                        }
-                        Button(action: {
-                            self.showingAddTask1 = true
-                        }) {
-                            Text("Add oil")
-                                .font(.system(size: 24))
-                                .foregroundColor(Color(red: 0.538, green: 0.46, blue: 0.711))
-                                .padding()
-                                .offset(x: -35, y: 0)
-                       
-                            HStack {
-                        Image(systemName: "plus.circle.fill")
-                                    .offset(x: -160, y: 0)
+    @State private var tasks: [Task] = []
+    @State private var showingAddTask = false
+    @State private var selectedOption: String = ""
+    let exampleColor: Color = (Color(red: 1.0, green: 0.984, blue: 0.975))
+    @Query var taskslist: [TaskModel]
 
-                                    .font(.headline)
-                .bold()
-            .foregroundColor(Color(red: 0.538, green: 0.46, blue: 0.711))
-                                            }
 
-                        }
-                    }
-                    .navigationBarTitle("Oil",displayMode: .inline)
-                    .background(Color(red: 1.0, green: 0.984, blue: 0.975))
-                    .background(exampleColor)
-                    .scrollContentBackground(.hidden)
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-                }
-                .navigationBarBackButtonHidden(true)                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            print("Custom Action")
-                            presentationMode.wrappedValue.dismiss()
-                                
-                        } label: {
-                            HStack {
-                                Image(systemName: "chevron.left")
-                                Text("Back")
-                                    .offset(x:15 , y:0)
-                            }
-                        }
-                    }
-                }
-
-                
-
-                .sheet(isPresented: $showingAddTask1) {
-                    AddTask1View(isShowing: $showingAddTask1) { task in
-                        self.tasks.append(task)
+    var body: some View {
+        NavigationView {
+            VStack {
+              
+                List {
+                   // ForEach(tasks.indices, id: \.self) { index in
                         
+                        ForEach(tasks.indices, id: \.self) { index in
+
+                        Task1Row(task: $tasks[index])
+                    }
+                    .onMove(perform: move)
+                    .onDelete(perform: delete)
+                }
+                Button(action: {
+                    self.showingAddTask = true
+                }) {
+                    Text("Add oil")
+                        .font(.system(size: 24))
+                        .foregroundColor(Color(red: 0.538, green: 0.46, blue: 0.711))
+                        .padding()
+                        .offset(x: -35, y: 0)
+
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                            .offset(x: -160, y: 0)
+                            .font(.headline)
+                            .bold()
+                            .foregroundColor(Color(red: 0.538, green: 0.46, blue: 0.711))
                     }
                 }
             }
-            
-            func move(from source: IndexSet, to destination: Int) {
-                tasks.move(fromOffsets: source, toOffset: destination)
-            }
-            
-            func delete(at offsets: IndexSet) {
-                tasks.remove(atOffsets: offsets)
+            .navigationBarItems(trailing: menuButton)
+            .navigationBarTitle("Oil", displayMode: .inline)
+            .background(Color(red: 1.0, green: 0.984, blue: 0.975))
+            .background(exampleColor)
+            .scrollContentBackground(.hidden)
+            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+           
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    print("Custom Action")
+                    presentationMode.wrappedValue.dismiss()
+
+                } label: {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                        Text("Back")
+                            .offset(x:-8 , y:0)
+                    }
+                }
             }
         }
 
-        import SwiftUI
-
-        struct Task1: Identifiable {
-            let id = UUID()
-            var name: String
-            var dueDate: Date
-            var completed: Bool = false
-            var noteName: String = ""
+        .sheet(isPresented: $showingAddTask) {
+            AddTask1View(isShowing: $showingAddTask) { task in
+                self.tasks.append(task)
+                // Save tasks to UserDefaults whenever it changes
+                saveTasksToUserDefaults()
+            }
         }
+        // Load tasks from UserDefaults when the view appears
+        .onAppear {
+            loadTasksFromUserDefaults()
+            
+            
+                print("the count of oil \(taskslist.count)")
+            
+            
+            
+        }
+    }
+    private var menuButton: some View {
+        Menu {
+            Button(role: .destructive, action: {
+                selectedOption = ""
+                tasks.removeAll()
+            }) {
+                Label("Delete All", systemImage: "trash")
+                    .foregroundColor(.red)
+            }
+        } label: {
+            Label(selectedOption, systemImage: "ellipsis.circle")
+                .foregroundColor(Color(red: 0.537, green: 0.46, blue: 0.711))
+        }
+    }
+
+
+    func move(from source: IndexSet, to destination: Int) {
+        tasks.move(fromOffsets: source, toOffset: destination)
+        // Save tasks to UserDefaults whenever it changes
+        saveTasksToUserDefaults()
+    }
+
+    func delete(at offsets: IndexSet) {
+        tasks.remove(atOffsets: offsets)
+        // Save tasks to UserDefaults whenever it changes
+        saveTasksToUserDefaults()
+    }
+
+    // Save tasks to UserDefaults
+    private func saveTasksToUserDefaults() {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(tasks) {
+            UserDefaults.standard.set(encoded, forKey: "oil_tasks")
+        }
+    }
+
+    // Load tasks from UserDefaults
+    private func loadTasksFromUserDefaults() {
+        let decoder = JSONDecoder()
+        if let data = UserDefaults.standard.data(forKey: "oil_tasks"),
+           let decodedTasks = try? decoder.decode([Task].self, from: data) {
+            self.tasks = decodedTasks
+        }
+    }
+}
+
+// ... (rest of your code remains unchanged)
+
+
+import SwiftUI
+
+struct Task1: Identifiable, Codable { // Conform to Codable
+    var id = UUID()
+    var name: String
+    var dueDate: Date
+    var completed: Bool = false
+    var noteName: String = ""
+}
+
+// ... (rest of your code remains unchanged)
+
 
         struct Task1Row: View {
             @Binding var task: Task
@@ -200,6 +259,7 @@ struct oil: View {
 
 
         struct AddTask1View: View {
+            @Environment(\.modelContext) var modelContext
             @Environment(\.presentationMode) var presentationMode
             @State private var taskName: String = ""
             @State private var noteName: String = ""
@@ -239,7 +299,7 @@ struct oil: View {
                         
                     }
                     
-                    .navigationBarTitle("Add Oil", displayMode: .inline)
+                    .navigationBarTitle("Add oil", displayMode: .inline)
                     .navigationBarItems(leading: Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
@@ -249,7 +309,16 @@ struct oil: View {
                         let task = Task(name: self.taskName, dueDate: self.dueDate, noteName: self.noteName )
                         self.saveTask(task)
                         self.presentationMode.wrappedValue.dismiss()
-                    }) {
+                        
+                        let currentTask = TaskModel(name: self.taskName, date: self.dueDate , note:  self.noteName)
+                        
+                        modelContext.insert(currentTask)
+
+                        
+                        try? modelContext.save()
+
+                        
+                    })  {
                         Text("Save")
                             .foregroundColor(Color(red: 0.538, green: 0.46, blue: 0.711))
                     })

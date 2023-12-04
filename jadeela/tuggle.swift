@@ -2,103 +2,151 @@
 //  tuggle.swift
 //  jadeela
 //
-//  Created by Diyam Alrabah on 16/05/1445 AH.
+//  Created by aisha rashid alshammari  on 18/05/1445 AH.
 //
 
 import SwiftUI
+import SwiftData
 
 struct tuggle: View {
     @Environment(\.presentationMode) var presentationMode
+    @State private var tasks: [Task] = []
+    @State private var showingAddTask = false
+    @State private var selectedOption: String = ""
 
-        @State private var tasks: [Task] = []
-        @State private var showingAddTask = false
-        let exampleColor : Color = (Color(red: 1.0, green: 0.984, blue: 0.975))
-        var body: some View {
-            NavigationView {
-                VStack {
-                    List {
+    let exampleColor: Color = (Color(red: 1.0, green: 0.984, blue: 0.975))
+    
+    
+    @Query var taskslist: [TaskModel]
+
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                List {
+                   // ForEach(tasks.indices, id: \.self) { index in
+                        
                         ForEach(tasks.indices, id: \.self) { index in
-                            TaskRow(task: $tasks[index])
-                            
-                        }
-                        .onMove(perform: move)
-                        .onDelete(perform: delete)
+
+                        Task1Row(task: $tasks[index])
                     }
-                    Button(action: {
-                        self.showingAddTask = true
-                    }) {
-                        Text("Add Mask")
-                            .font(.system(size: 24))
+                    .onMove(perform: move)
+                    .onDelete(perform: delete)
+                }
+                Button(action: {
+                    self.showingAddTask = true
+                }) {
+                    Text("Add Mask")
+                        .font(.system(size: 24))
+                        .foregroundColor(Color(red: 0.538, green: 0.46, blue: 0.711))
+                        .padding()
+                        .offset(x: -35, y: 0)
+
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                            .offset(x: -200, y: 0)
+                            .font(.headline)
+                            .bold()
                             .foregroundColor(Color(red: 0.538, green: 0.46, blue: 0.711))
-                            .padding()
-                            .offset(x: -35, y: 0)
-                   
-                        HStack {
-                    Image(systemName: "plus.circle.fill")
-                                .offset(x: -200, y: 0)
-
-                                .font(.headline)
-            .bold()
-        .foregroundColor(Color(red: 0.538, green: 0.46, blue: 0.711))
-                                        }
-
-                    }
-                }
-                .navigationBarTitle("Mask",displayMode: .inline)
-                
-                .background(Color(red: 1.0, green: 0.984, blue: 0.975))
-                .background(exampleColor)
-                .scrollContentBackground(.hidden)
-                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-                
-            }
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        print("Custom Action")
-                        presentationMode.wrappedValue.dismiss()
-                            
-                    } label: {
-                        HStack {
-                            Image(systemName: "chevron.left")
-                            Text("Back")
-                                .offset(x:15 , y:0)
-                        }
                     }
                 }
             }
-            .sheet(isPresented: $showingAddTask) {
-                AddTaskView(isShowing: $showingAddTask) { task in
-                    self.tasks.append(task)
-                    
+            .navigationBarItems(trailing: menuButton)
+            .navigationBarTitle("Mask", displayMode: .inline)
+            .background(Color(red: 1.0, green: 0.984, blue: 0.975))
+            .background(exampleColor)
+            .scrollContentBackground(.hidden)
+            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    print("Custom Action")
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                        Text("Back")
+                            .offset(x:-6 , y:0)
+                    }
                 }
             }
         }
-        
-        func move(from source: IndexSet, to destination: Int) {
-            tasks.move(fromOffsets: source, toOffset: destination)
+        .sheet(isPresented: $showingAddTask) {
+            AddTaskView(isShowing: $showingAddTask) { task in
+                self.tasks.append(task)
+                // Save tasks to UserDefaults whenever it changes
+                saveTasksToUserDefaults()
+            }
         }
-        
-        func delete(at offsets: IndexSet) {
-            tasks.remove(atOffsets: offsets)
+        // Load tasks from UserDefaults when the view appears
+        .onAppear {
+            loadTasksFromUserDefaults()
+        }
+    }
+    private var menuButton: some View {
+        Menu {
+            Button(role: .destructive, action: {
+                selectedOption = ""
+                tasks.removeAll()
+            }) {
+                Label("Delete All", systemImage: "trash")
+                    .foregroundColor(.red)
+            }
+        } label: {
+            Label(selectedOption, systemImage: "ellipsis.circle")
+                .foregroundColor(Color(red: 0.537, green: 0.46, blue: 0.711))
         }
     }
 
-    import SwiftUI
 
-    struct Task: Identifiable {
-        let id = UUID()
-        var name: String
-        var dueDate: Date
-        var completed: Bool = false
-        var noteName: String = ""
+    func move(from source: IndexSet, to destination: Int) {
+        tasks.move(fromOffsets: source, toOffset: destination)
+        // Save tasks to UserDefaults whenever it changes
+        saveTasksToUserDefaults()
     }
+
+    func delete(at offsets: IndexSet) {
+        tasks.remove(atOffsets: offsets)
+        // Save tasks to UserDefaults whenever it changes
+        saveTasksToUserDefaults()
+    }
+
+    // Save tasks to UserDefaults
+    private func saveTasksToUserDefaults() {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(tasks) {
+            UserDefaults.standard.set(encoded, forKey: "tasks")
+        }
+    }
+
+    // Load tasks from UserDefaults
+    private func loadTasksFromUserDefaults() {
+        let decoder = JSONDecoder()
+        if let data = UserDefaults.standard.data(forKey: "tasks"),
+           let decodedTasks = try? decoder.decode([Task].self, from: data) {
+            self.tasks = decodedTasks
+        }
+    }
+}
+
+
+
+import SwiftUI
+
+struct Task: Identifiable, Codable {
+    var id = UUID()
+    var name: String
+    var dueDate: Date
+    var completed: Bool = false
+    var noteName: String = ""
+}
+
 
     struct TaskRow: View {
         @Binding var task: Task
         @State private var isEditing = false
-        
         var body: some View {
             VStack {
                 HStack {
@@ -147,6 +195,7 @@ struct tuggle: View {
             }
         }
     }
+
     struct EditTaskView: View {
         @Binding var task: Task
         @Binding var isEditing: Bool
@@ -154,6 +203,7 @@ struct tuggle: View {
         @State private var editedNoteName: String
         @State private var editedDueDate: Date
         
+
         init(task: Binding<Task>, isEditing: Binding<Bool>) {
             _task = task
             _isEditing = isEditing
@@ -198,72 +248,81 @@ struct tuggle: View {
         }
     }
 
-
-    struct AddTaskView: View {
-        @Environment(\.presentationMode) var presentationMode
-        @State private var taskName: String = ""
-        @State private var noteName: String = ""
-        @State private var dueDate: Date = Date()
-        @State private var showCalendar = false
-        @State private var selectedDate = Date()
-        let exampleColor : Color = (Color(red: 1.0, green: 0.984, blue: 0.975))
-
-        var isShowing: Binding<Bool>
-        var saveTask: (Task) -> Void
-
-        var body: some View {
-            NavigationView {
-                Form {
-                    TextField("Mask", text: $taskName)
-                        .font(.headline)
-                        .padding()
-                       
-                    TextField("Note", text: $noteName)
-                        .font(.headline)
-                        .padding()
-                    
-                    Toggle(isOn: $showCalendar) {
-                        Text("Show Calendar")
-                          
-                        
-                    }
-                   
+struct AddTaskView: View {
+    
+    @Environment(\.modelContext) var modelContext
+    @Environment(\.presentationMode) var presentationMode
+    @State private var taskName: String = ""
+    @State private var noteName: String = ""
+    @State private var dueDate: Date = Date()
+    @State private var showCalendar = false
+    @State private var selectedDate = Date()
+    let exampleColor : Color = (Color(red: 1.0, green: 0.984, blue: 0.975))
+    
+    var isShowing: Binding<Bool>
+    var saveTask: (Task) -> Void
+    var body: some View {
+        NavigationView {
+            Form {
+                
+                TextField("Mask", text: $taskName)
+                    .font(.headline)
                     .padding()
+                
+                TextField("Note", text: $noteName)
+                    .font(.headline)
+                    .padding()
+                
+                Toggle(isOn: $showCalendar) {
+                    Text("Show Calendar")
                     
-                    if showCalendar {
-                        DatePicker("", selection: $dueDate, displayedComponents: .date)
-                            .datePickerStyle(GraphicalDatePickerStyle())
-                            .padding()
-                        
-                    }
                     
                 }
                 
-                .navigationBarTitle("Add Mask", displayMode: .inline)
-                .navigationBarItems(leading: Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Cancel")
-                        .foregroundColor(Color(red: 0.538, green: 0.46, blue: 0.711))
-                }, trailing: Button(action: {
-                    let task = Task(name: self.taskName, dueDate: self.dueDate, noteName: self.noteName )
-                    self.saveTask(task)
-                    self.presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Save")
-                        .foregroundColor(Color(red: 0.538, green: 0.46, blue: 0.711))
-                })
-                .background(exampleColor)
-                .scrollContentBackground(.hidden)
-                .tint(.purple)
-                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                .padding()
+                
+                if showCalendar {
+                    DatePicker("", selection: $dueDate, displayedComponents: .date)
+                        .datePickerStyle(GraphicalDatePickerStyle())
+                        .padding()
+                    
+                }
+                
             }
+            
+            .navigationBarTitle("Add Mask", displayMode: .inline)
+            .navigationBarItems(leading: Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("Cancel")
+                    .foregroundColor(Color(red: 0.538, green: 0.46, blue: 0.711))
+            }, trailing: Button(action: {
+                let task = Task(name: self.taskName, dueDate: self.dueDate, noteName: self.noteName )
+                self.saveTask(task)
+                self.presentationMode.wrappedValue.dismiss()
+                
+                let currentTask = TaskModel(name: self.taskName, date: self.dueDate , note:  self.noteName)
+                
+                modelContext.insert(currentTask)
+
+                
+                try? modelContext.save()
+
+                
+            }) {
+                Text("Save")
+                    .foregroundColor(Color(red: 0.538, green: 0.46, blue: 0.711))
+            })
+            .background(exampleColor)
+            .scrollContentBackground(.hidden)
+            .tint(.purple)
+            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
         }
     }
-
-
-    struct tuggle_Previews: PreviewProvider {
-        static var previews: some View {
-            tuggle()
-        }
+    
+}
+struct tuggle_Previews: PreviewProvider {
+    static var previews: some View {
+        tuggle()
     }
+}

@@ -24,7 +24,9 @@ struct jadeelaApp: App {
         WindowGroup {
             SplashScreen()
             localNotification()
-
+           
         }
+        .modelContainer(for: TaskModel.self)
+
     }
 }

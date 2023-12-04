@@ -6,15 +6,23 @@
 //
 
 import SwiftUI
-
+import SwiftData
 struct Routine: View {
     
     @Environment(\.presentationMode) var presentationMode
-    
     @State var selectedDate: Date = Date()
     @State private var isBackTapped = false
     @State private var showingPopup = false
     @State private var isActive: Bool = false
+    
+    @State private var dates: Set<DateComponents> = []
+
+    @Query var taskslist: [TaskModel]
+    
+    
+    @State var currentTask = TaskModel(name: "", date: Date(), note: "")
+
+    
     
     var body: some View {
         
@@ -32,7 +40,7 @@ struct Routine: View {
                     
                     HStack (spacing: 26){
                         
-                        NavigationLink(destination:tuggle() ) {
+                        NavigationLink(destination:tuggle()) {
                             
                             VStack {
                                 
@@ -79,6 +87,8 @@ struct Routine: View {
                             
                             
                         }
+                        .modelContainer(for: TaskModel.self)
+
                         
                         
                         NavigationLink(destination:cut() ) {
@@ -107,6 +117,8 @@ struct Routine: View {
                         
                         
                     }
+                    .padding(44)
+
                     //                    .offset(x:0 , y:-10)
                     //                    .padding(40)
                     //
@@ -114,6 +126,7 @@ struct Routine: View {
                     
                     VStack(alignment: .leading){
                         Text("calendar")
+                            .offset(x:100, y:0)
                             .font(.title2)
                             .fontWeight(.bold)
                             .multilineTextAlignment(.leading)
@@ -122,29 +135,58 @@ struct Routine: View {
                         //                         .padding(.top, 20)
                         //                          .position(x: 80, y: -50)
                     
-                    DatePicker("calendar", selection: $selectedDate)
+                       
+                       
+                       DatePicker("calendar", selection: $selectedDate)
                         .accentColor(Color(red: 0.556, green: 0.434, blue: 0.812))
                         .frame(width: 305.0)
                         .datePickerStyle(GraphicalDatePickerStyle())
                         .padding(.top, 10)
+ 
                     //                      .padding(.bottom, 150)
                     
                     
                         .onChange(of: selectedDate) { _ in
-                            showingPopup = true
+                            
+                            for task in taskslist
+                            {
+                                
+                                print("the Date in List \( chnageFormat(date:task.date))")
+                                print("the Date in List \( chnageFormat(date:selectedDate))")
+
+                                if chnageFormat(date: task.date) == chnageFormat(date: selectedDate)
+                                {
+                                    print("task selected !!!")
+                                    showingPopup = true
+                                    
+                                    currentTask = task
+
+                                }
+                                else
+                                {
+                                    print("No task selected !!!")
+
+                                }
+                            }
+                            
+                            
                         }
                 }
             }
+            
                             
                             if showingPopup {
-                                PopoverView(text: "test")
+                                PopoverView(text: currentTask.name)
                                     .onTapGesture {
                                         showingPopup = false
                              
                         }
                 }
             }
-            
+            .onAppear{
+                
+                addingDates()
+            }
             
             
         }
@@ -159,13 +201,18 @@ struct Routine: View {
                         HStack {
                             Image(systemName: "chevron.left")
                             Text("Back")
-                                .offset(x:15 , y:0)
+                                .offset(x:-6 , y:0)
                         }
                     }
                 }
             }
+        
+        
 
     }
+    
+    
+    
         struct PopoverView: View {
             @State var text: String = "test"
             
@@ -174,7 +221,7 @@ struct Routine: View {
                     Rectangle()
                         .frame(width: 300, height: 100)
                         .foregroundColor(.white)
-                        .shadow(color:Color.black.opacity(0.2),radius: 5, x:0,y:5)
+                       
                         .foregroundColor(Color(red: 0.906, green: 0.906, blue: 0.906))
                         .cornerRadius(10)
                         .overlay {
@@ -182,8 +229,9 @@ struct Routine: View {
                                 .foregroundColor(.black)
                         }
                     
-                    
+                        .shadow(color:Color.black.opacity(0.2),radius: 5, x:0,y:5)
                 }
+                
                 .padding(.horizontal, 20)
                 .padding(.vertical, 10)
                 .position(x: 200, y: 400)
@@ -191,6 +239,51 @@ struct Routine: View {
             }
             
         }
+    
+    
+    
+    func addingDates()
+    {
+        for task in taskslist {
+            
+            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: task.date)
+         
+            dates.insert(dateComponents)
+            
+            print("the count of addingDates \(dates.count)")
+            print("the date is \(task.date)")
+        }
+        
+    }
+    
+    
+    func addingDatetoList(task : TaskModel)
+    {
+            
+            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: task.date)
+         
+            dates.insert(dateComponents)
+            
+            print("the count of addingDates \(dates.count)")
+            print("the date is \(task.date)")
+        
+        
+    }
+    
+    
+    func chnageFormat (date:Date) -> String
+    {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "MM/dd/yyyy"
+        let showDate = inputFormatter.date(from: "07/21/2016")
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        let resultString = inputFormatter.string(from: date)
+        
+        return resultString
+    }
+    
+    
+    
     }
     struct Routine_Previews: PreviewProvider {
         static var previews: some View {

@@ -9,7 +9,6 @@ import AVFoundation
 import Photos
 
 struct ContentView: View {
-
     @State private var isShowingCamera = false
     @State private var isActive: Bool = false
     @State private var hairTypeActive = false
@@ -105,7 +104,7 @@ struct ContentView: View {
                 #endif
             }
         } 
-   .padding(.horizontal, 60)
+   .padding(.horizontal, 40)
         .tint(Color(UIColor(hex: "8E6FCF")))
 
         
