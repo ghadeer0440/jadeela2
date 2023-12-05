@@ -2,6 +2,8 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
+    @EnvironmentObject var notificationManager: UserNotificationManager
+
     @State private var isShowingCamera = false
     @State private var isActive: Bool = false
     @State private var hairTypeResult: String = ""
@@ -96,6 +98,14 @@ struct ContentView: View {
 //            .padding(.horizontal, 60)
             .navigationBarTitle("", displayMode: .inline)
         }
+        .onAppear {
+                notificationManager.checkNotificationPermission()
+            }
+            .onChange(of: notificationManager.notificationAuthorizationStatus) { status in
+                if status == .notDetermined {
+                    notificationManager.requestNotificationPermission()
+                }
+            }
       .padding(.horizontal,60)
 
         .tint(Color(UIColor(hex: "8E6FCF")))

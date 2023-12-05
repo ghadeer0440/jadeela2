@@ -10,6 +10,7 @@ import SwiftData
 struct Routine: View {
     
     @Environment(\.presentationMode) var presentationMode
+
     @State var selectedDate: Date = Date()
     @State private var isBackTapped = false
     @State private var showingPopup = false
@@ -190,6 +191,8 @@ struct Routine: View {
             
             
 //        }
+        
+           
         .navigationBarBackButtonHidden(true)                .navigationBarTitle("Routine", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -211,7 +214,7 @@ struct Routine: View {
 
     }
     
-    
+      
     
         struct PopoverView: View {
             @State var text: String = "test"
