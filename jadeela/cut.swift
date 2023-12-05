@@ -241,6 +241,8 @@ struct task2: Identifiable, Codable {
 
 
         struct AddTask2View: View {
+            @State private var chosenTime: Date = Date()
+
             @Environment(\.presentationMode) var presentationMode
             @Environment(\.modelContext) var modelContext
             @State private var taskName: String = ""
@@ -278,7 +280,8 @@ struct task2: Identifiable, Codable {
                                 .padding()
                             
                         }
-                        
+                        DatePicker("Choose Time", selection: $chosenTime, displayedComponents: .hourAndMinute)
+                            .datePickerStyle(.wheel)
                     }
                     
                     .navigationBarTitle("Add Cut", displayMode: .inline)

@@ -15,6 +15,7 @@
 		4BAF62C12B18660C00170310 /* wavy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF62C02B18660C00170310 /* wavy.swift */; };
 		4BAF62C32B18662500170310 /* curly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF62C22B18662500170310 /* curly.swift */; };
 		4BAF62C52B18664400170310 /* straight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF62C42B18664400170310 /* straight.swift */; };
+		6B3613D02B1E221900606DD0 /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3613CF2B1E221900606DD0 /* UserNotificationManager.swift */; };
 		6BE3CED12B0F38A5009234A2 /* jadeelaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE3CED02B0F38A5009234A2 /* jadeelaApp.swift */; };
 		6BE3CED32B0F38A5009234A2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE3CED22B0F38A5009234A2 /* ContentView.swift */; };
 		6BE3CED52B0F38A6009234A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BE3CED42B0F38A6009234A2 /* Assets.xcassets */; };
@@ -25,7 +26,7 @@
 		6BE3CEFD2B0F40D2009234A2 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE3CEFC2B0F40D2009234A2 /* SplashScreen.swift */; };
 		6BE3CEFF2B0F98D8009234A2 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE3CEFE2B0F98D8009234A2 /* Camera.swift */; };
 		A2372FCF2B1C7735001F5758 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2372FCE2B1C7735001F5758 /* Task.swift */; };
-		A2372FD52B1DD42D001F5758 /* MyImageClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A2372FD42B1DD42D001F5758 /* MyImageClassifier.mlmodel */; };
+		A2372FDD2B1F11F9001F5758 /* MyImageClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A2372FDC2B1F11F9001F5758 /* MyImageClassifier.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		4BAF62C02B18660C00170310 /* wavy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wavy.swift; sourceTree = "<group>"; };
 		4BAF62C22B18662500170310 /* curly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = curly.swift; sourceTree = "<group>"; };
 		4BAF62C42B18664400170310 /* straight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = straight.swift; sourceTree = "<group>"; };
+		6B3613CF2B1E221900606DD0 /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		6BE3CECD2B0F38A5009234A2 /* jadeela.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jadeela.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BE3CED02B0F38A5009234A2 /* jadeelaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jadeelaApp.swift; sourceTree = "<group>"; };
 		6BE3CED22B0F38A5009234A2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,7 +69,7 @@
 		6BE3CEFC2B0F40D2009234A2 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		6BE3CEFE2B0F98D8009234A2 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		A2372FCE2B1C7735001F5758 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		A2372FD42B1DD42D001F5758 /* MyImageClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MyImageClassifier.mlmodel; path = "../../../Downloads/jadeela2 5/jadeela/MyImageClassifier.mlmodel"; sourceTree = "<group>"; };
+		A2372FDC2B1F11F9001F5758 /* MyImageClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MyImageClassifier.mlmodel; path = ../../../Desktop/MyImageClassifier.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				432EE2032B15C5E60063FB9C /* Routine.swift */,
 				6BE3CEFE2B0F98D8009234A2 /* Camera.swift */,
 				4BAF62BA2B18659500170310 /* localNotification.swift */,
+				6B3613CF2B1E221900606DD0 /* UserNotificationManager.swift */,
 				4BAF62B82B18650A00170310 /* tuggle.swift */,
 				4BAF62BC2B1865B300170310 /* oil.swift */,
 				4BAF62BE2B1865E300170310 /* cut.swift */,
@@ -131,7 +134,7 @@
 				4BAF62C02B18660C00170310 /* wavy.swift */,
 				4BAF62C22B18662500170310 /* curly.swift */,
 				4BAF62C42B18664400170310 /* straight.swift */,
-				A2372FD42B1DD42D001F5758 /* MyImageClassifier.mlmodel */,
+				A2372FDC2B1F11F9001F5758 /* MyImageClassifier.mlmodel */,
 				6BE3CED42B0F38A6009234A2 /* Assets.xcassets */,
 				6BE3CED62B0F38A6009234A2 /* Preview Content */,
 			);
@@ -293,16 +296,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B3613D02B1E221900606DD0 /* UserNotificationManager.swift in Sources */,
 				4BAF62BF2B1865E300170310 /* cut.swift in Sources */,
 				4BAF62BD2B1865B300170310 /* oil.swift in Sources */,
 				4BAF62C32B18662500170310 /* curly.swift in Sources */,
 				4BAF62C52B18664400170310 /* straight.swift in Sources */,
 				6BE3CEFF2B0F98D8009234A2 /* Camera.swift in Sources */,
 				6BE3CEFD2B0F40D2009234A2 /* SplashScreen.swift in Sources */,
+				A2372FDD2B1F11F9001F5758 /* MyImageClassifier.mlmodel in Sources */,
 				4BAF62BB2B18659500170310 /* localNotification.swift in Sources */,
 				432EE2042B15C5E60063FB9C /* Routine.swift in Sources */,
 				4BAF62B92B18650A00170310 /* tuggle.swift in Sources */,
-				A2372FD52B1DD42D001F5758 /* MyImageClassifier.mlmodel in Sources */,
 				6BE3CED32B0F38A5009234A2 /* ContentView.swift in Sources */,
 				4BAF62C12B18660C00170310 /* wavy.swift in Sources */,
 				A2372FCF2B1C7735001F5758 /* Task.swift in Sources */,
@@ -470,7 +474,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"jadeela/Preview Content\"";
-				DEVELOPMENT_TEAM = T739AFC8K5;
+				DEVELOPMENT_TEAM = BTAPXUK32G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = " To take picture and detect your hair.";
@@ -500,7 +504,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"jadeela/Preview Content\"";
-				DEVELOPMENT_TEAM = T739AFC8K5;
+				DEVELOPMENT_TEAM = BTAPXUK32G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = " To take picture and detect your hair.";

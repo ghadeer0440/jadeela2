@@ -14,7 +14,7 @@ struct Routine: View {
     @State private var isBackTapped = false
     @State private var showingPopup = false
     @State private var isActive: Bool = false
-    
+    @State var date = Date()
     @State private var dates: Set<DateComponents> = []
 
     @Query var taskslist: [TaskModel]
@@ -290,7 +290,6 @@ struct Routine: View {
             Routine()
         }
     }
-    
 
 
 

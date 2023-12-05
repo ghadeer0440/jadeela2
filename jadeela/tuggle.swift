@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 struct tuggle: View {
     @Environment(\.presentationMode) var presentationMode
@@ -197,6 +198,7 @@ struct Task: Identifiable, Codable {
     }
 
     struct EditTaskView: View {
+        @State private var chosenTime: Date = Date()
         @Binding var task: Task
         @Binding var isEditing: Bool
         @State private var editedTaskName: String
@@ -227,7 +229,9 @@ struct Task: Identifiable, Codable {
                     DatePicker("", selection: $editedDueDate, displayedComponents: .date)
                         .datePickerStyle(GraphicalDatePickerStyle())
                         .padding()
-                        
+                   
+                    DatePicker("Choose Time", selection: $chosenTime, displayedComponents: .hourAndMinute)
+                        .datePickerStyle(.wheel)
 
                 }
                 
@@ -248,7 +252,8 @@ struct Task: Identifiable, Codable {
     }
 
 struct AddTaskView: View {
-    
+    @EnvironmentObject var notificationManager: UserNotificationManager
+    @State private var chosenTime: Date = Date()
     @Environment(\.modelContext) var modelContext
     @Environment(\.presentationMode) var presentationMode
     @State private var taskName: String = ""
@@ -287,6 +292,11 @@ struct AddTaskView: View {
                     
                 }
                 
+                DatePicker("Choose Time", selection: $chosenTime, displayedComponents: .hourAndMinute)
+                    .datePickerStyle(.wheel)
+                
+
+                
             }
             
             .navigationBarTitle("Add Mask", displayMode: .inline)
@@ -306,6 +316,10 @@ struct AddTaskView: View {
 
                 
                 try? modelContext.save()
+                
+                
+                
+                scheduleNotification()
 
                 
             }) {
@@ -317,8 +331,55 @@ struct AddTaskView: View {
             .tint(Color(UIColor(hex: "8E6FCF")))
             .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
         }
-    }
+       
+//        .onAppear {
+//            notificationManager.checkNotificationPermission()
+//        }
+//        .onChange(of: notificationManager.notificationAuthorizationStatus) { status in
+//            if status == .notDetermined {
+//                notificationManager.requestNotificationPermission()
+//            }
+//        }
+} //body
     
+    func scheduleNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Jadeela"
+        content.subtitle = "Your hair needs you!"
+        content.sound = .default
+        content.badge = 1
+
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.hour, .minute], from: chosenTime)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+
+        let request = UNNotificationRequest(
+            identifier: UUID().uuidString,
+            content: content,
+            trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error scheduling notification: \(error)")
+            } else {
+                print("Notification scheduled successfully")
+            }
+        }
+    }
+    class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
+        
+        func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+            
+            let userInfo = response.notification.request.content.userInfo
+            print(userInfo)
+            completionHandler()
+        }
+        
+        func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            completionHandler([.banner, .sound, .badge])
+        }
+    }
+
 }
 struct tuggle_Previews: PreviewProvider {
     static var previews: some View {

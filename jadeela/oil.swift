@@ -259,6 +259,8 @@ struct Task1: Identifiable, Codable { // Conform to Codable
 
 
         struct AddTask1View: View {
+            @State private var chosenTime: Date = Date()
+
             @Environment(\.modelContext) var modelContext
             @Environment(\.presentationMode) var presentationMode
             @State private var taskName: String = ""
@@ -296,6 +298,8 @@ struct Task1: Identifiable, Codable { // Conform to Codable
                                 .padding()
                             
                         }
+                        DatePicker("Choose Time", selection: $chosenTime, displayedComponents: .hourAndMinute)
+                            .datePickerStyle(.wheel)
                         
                     }
                     
